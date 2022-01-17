@@ -1,0 +1,49 @@
+$colors: #d45352, #fdf7e3, #49a66d, #fee9ec, #fbc63f, #e7f2eb, #d0534f, #fef8e2, #46a968, #fdecec;
+
+@for $i from 1 through length($colors) {
+    li:nth-child(#{length($colors)}n+#{$i}) {
+        background: nth($colors, $i)
+    }
+}
+
+.containerBallSelector{
+    padding: 10px;
+    height: 100%;
+}
+
+.clearSelection{
+    text-align: center;
+    a{
+      color: #2491fa;  
+      cursor: pointer;
+    }
+}
+
+.ballNumbers{
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    
+    li{
+        display: inline-block;
+        padding: 10px;
+        margin: 0px 5px;
+        text-align: center;
+        border-radius: 100%;
+        height: 40px;
+        width: 40px;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid #c5c5c5;
+        
+        span{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+    }
+}
