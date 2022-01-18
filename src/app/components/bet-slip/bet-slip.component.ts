@@ -46,15 +46,9 @@ export class BetSlipComponent implements OnInit {
    });
   }
 
-  //This function validate the minimum price of bet
+  //This function multiply the price input by user for number of balls
   validateMinAmount(){
-    if(this.priceControl <= 0){
-      alert('Minimum bet is 5€');
-      return;
-    }
-
     this.totalAmount = this.priceControl * this.numberStack;
-
   }
 
   //Function that start the game
@@ -69,7 +63,7 @@ export class BetSlipComponent implements OnInit {
     }
 
     //Verify if the bet have minimum 5€
-    if(this.priceControl <= 0){
+    if(this.totalAmount < 5){
       alert('Minimum bet is 5€');
       return;
     }
