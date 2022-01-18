@@ -22,4 +22,14 @@ describe('BallSelectorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('The maximum balls chosen by user must be 8', () => {
+    for (let i = 0; i < 8; i++) {
+      component.chooseBall({number: i, color: '#'+(0x1000000+Math.random()*0xffffff).toString(16).substring(1,7)});
+      expect(component.arrayNumbersChoose.length).toBeLessThanOrEqual(8);
+      i++;
+    }
+  });
+
+
 });
