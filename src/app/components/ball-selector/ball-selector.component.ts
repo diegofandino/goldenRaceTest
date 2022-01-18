@@ -22,6 +22,7 @@ export class BallSelectorComponent implements OnInit {
     
     //create Array numbers
     this.loopArray(10);
+
     //indicates the number of balls
     this.ballService.numberBalls = 10;
 
@@ -29,13 +30,18 @@ export class BallSelectorComponent implements OnInit {
     this.ballService.betNumbers.subscribe( (arrayBalls) => {
       if(arrayBalls.length > 0){
         this.showMessageBet = true;
+
+        //Here is chosen the winner Ball
         this.winnerBallBet = this.betRandomNumber(1,this.ballService.numberBalls);
         let isFindBall = arrayBalls.find( (ball) => ball.number === this.winnerBallBet );
+
         if(isFindBall != undefined){
+          //Winner Game
           this.winnerBet = isFindBall;
           //Multiply amount bet with 1.5
           this.totalAmount = this.ballService.amountBet * 1.5;
         } else {
+          //Lost Game
           this.totalAmount = 0;
           this.LooseBet = {number: this.winnerBallBet, color: '#f5f5f5'};
         }
@@ -47,14 +53,19 @@ export class BallSelectorComponent implements OnInit {
   //function that fill the array of balls
   loopArray(numberBets: number){
     for (let i = 1; i <= numberBets; i++) {
-        
         this.arrayNumbers.push({number: i, color: '#'+(0x1000000+Math.random()*0xffffff).toString(16).substring(1,7)});      
     }
   }
 
   //function that choose the ball selected by user
   chooseBall(object: any){
-    
+
+    //choose maximum 8 balls
+    if(this.arrayNumbersChoose.length > 7){
+      alert('choose maximum 8 balls');
+      return;
+    }
+
     if(this.arrayNumbersChoose.length == 0){
       this.arrayNumbersChoose.push({number: object.number, color: object.color});
       this.ballService.chosenNumbers.next([...this.arrayNumbersChoose]);
@@ -85,7 +96,7 @@ export class BallSelectorComponent implements OnInit {
     this.ballService.amountBet = 0;
   }
 
-  //When play game, this function select the winner ball
+  //When start game, this function select the winner ball
   betRandomNumber = (min: number, max: number) => { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
