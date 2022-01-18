@@ -62,17 +62,18 @@ export class BetSlipComponent implements OnInit {
       return;
     }
 
+    //Verify the total amount of bet
+    if(this.totalAmount == 0){
+      alert('You need press in button "Ok" to calculate your bet');
+      return;
+    }
+    
     //Verify if the bet have minimum 5€
     if(this.totalAmount < 5){
       alert('Minimum bet is 5€');
       return;
     }
     
-    //Verify the total amount of bet
-    if(this.totalAmount == 0){
-      alert('You need press in button "Ok" to calculate your bet');
-      return;
-    }
     
     for( var i = 0; i < this.arrayNumberChosen.length; i++){ 
       
