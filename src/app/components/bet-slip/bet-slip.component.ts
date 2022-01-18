@@ -15,6 +15,7 @@ export class BetSlipComponent implements OnInit {
   priceControl: number = 0;
   numberStack: number = 0;
   totalAmount: number = 0;
+  afterSubmitDisabled: boolean = false;
   constructor(private ballService :BallServicesService ) { }
 
   ngOnInit(): void {
@@ -34,6 +35,9 @@ export class BetSlipComponent implements OnInit {
         this.priceControl = 0;
         this.totalAmount = 0
       }
+      
+      //Enable button after clear Selection
+      this.ballService.amountBet == 0 ? this.afterSubmitDisabled = false : this.afterSubmitDisabled = true;
 
       if(value.length <= 0){
         this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => ({number: 0, color: '#f5f5f5'}));
@@ -67,7 +71,7 @@ export class BetSlipComponent implements OnInit {
       alert('You need press in button "Ok" to calculate your bet');
       return;
     }
-    
+
     //Verify if the bet have minimum 5€
     if(this.totalAmount < 5){
       alert('Minimum bet is 5€');
@@ -87,6 +91,7 @@ export class BetSlipComponent implements OnInit {
     
     this.ballService.amountBet = this.totalAmount;
     this.ballService.betNumbers.next(this.arrayNumberChosen);
+    this.afterSubmitDisabled = true;
   }
 
 }

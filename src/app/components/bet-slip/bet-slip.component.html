@@ -26,5 +26,5 @@
 
 <div class="totalAndPlay text-center">
     <h5> Total: {{ totalAmount }}€ </h5>
-    <button type="button" class="btn btn-primary customBtn" (click)="placeBet()"> Place bet </button>
+    <button [disabled]="afterSubmitDisabled" type="button" class="btn btn-primary customBtn" (click)="placeBet()"> Place bet </button>
 </div>
