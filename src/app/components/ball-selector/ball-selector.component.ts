@@ -15,6 +15,7 @@ export class BallSelectorComponent implements OnInit {
   LooseBet: ballIndividual = {number: 0, color: ''};
   winnerBallBet: number = 0;
   showMessageBet: boolean = false;
+  totalAmount: number = 0;
   constructor(private ballService : BallServicesService) { }
 
   ngOnInit(): void {
@@ -32,7 +33,10 @@ export class BallSelectorComponent implements OnInit {
         let isFindBall = arrayBalls.find( (ball) => ball.number === this.winnerBallBet );
         if(isFindBall != undefined){
           this.winnerBet = isFindBall;
+          //Multiply amount bet with 1.5
+          this.totalAmount = this.ballService.amountBet * 1.5;
         } else {
+          this.totalAmount = 0;
           this.LooseBet = {number: this.winnerBallBet, color: '#f5f5f5'};
         }
       } 
@@ -78,6 +82,7 @@ export class BallSelectorComponent implements OnInit {
     this.LooseBet = {number: 0, color: ''};
     this.ballService.chosenNumbers.next([]);
     this.ballService.betNumbers.next([]);
+    this.ballService.amountBet = 0;
   }
 
   //When play game, this function select the winner ball

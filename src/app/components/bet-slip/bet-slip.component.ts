@@ -13,6 +13,7 @@ export class BetSlipComponent implements OnInit {
   arrayNumberChosen: ballIndividual[] = [];
   arrayNumberBalls: ballIndividual[] = [];
   priceControl: number = 0;
+  numberStack: number = 0;
   totalAmount: number = 0;
   constructor(private ballService :BallServicesService ) { }
 
@@ -26,6 +27,14 @@ export class BetSlipComponent implements OnInit {
 
     //Balls
     this.ballService.chosenNumbers.subscribe((value: any) => {
+      
+      //change stake
+      this.numberStack = value.length;
+      if(this.totalAmount != 0){
+        this.priceControl = 0;
+        this.totalAmount = 0
+      }
+
       if(value.length <= 0){
         this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => ({number: 0, color: '#f5f5f5'}));
         index = 0;
@@ -37,17 +46,39 @@ export class BetSlipComponent implements OnInit {
    });
   }
 
+  //This function validate the minimum price of bet
   validateMinAmount(){
     if(this.priceControl <= 0){
       alert('Minimum bet is 5€');
       return;
     }
 
-    this.totalAmount = this.priceControl * 5;
+    this.totalAmount = this.priceControl * this.numberStack;
 
   }
 
+  //Function that start the game
   placeBet(){
+
+    //First, it is verify if the user doesn't have selected at least one ball
+    let verifyEmptyArray = this.arrayNumberChosen.filter( (eachBall) => eachBall.number != 0 );
+
+    if(verifyEmptyArray.length <= 0 ){
+      alert('You must select at least one ball.');
+      return;
+    }
+
+    //Verify if the bet have minimum 5€
+    if(this.priceControl <= 0){
+      alert('Minimum bet is 5€');
+      return;
+    }
+    
+    //Verify the total amount of bet
+    if(this.totalAmount == 0){
+      alert('You need press in button "Ok" to calculate your bet');
+      return;
+    }
     
     for( var i = 0; i < this.arrayNumberChosen.length; i++){ 
       
@@ -59,6 +90,7 @@ export class BetSlipComponent implements OnInit {
       
     }
     
+    this.ballService.amountBet = this.totalAmount;
     this.ballService.betNumbers.next(this.arrayNumberChosen);
   }
 
