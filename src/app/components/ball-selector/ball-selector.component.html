@@ -1,15 +1,54 @@
 <div class="containerBallSelector">
-    
-    <h5>Numbers</h5>
 
-    <ul class="ballNumbers">
-        <li *ngFor="let number of arrayNumbers; let i = index" (click)="chooseBall(number)" [ngStyle]="{'background-color': number['color']}">
-            <span>{{number.numero | number}}</span>    
-        </li>
-    </ul>
+    <div *ngIf="!showMessageBet"  class="selectBalls">
+
+        <h5>Numbers</h5>
+        
+        <ul class="ballNumbers">
+            <li *ngFor="let number of arrayNumbers; let i = index" (click)="chooseBall(number)" [ngStyle]="{'background-color': number['color']}">
+                <span>{{number.number | number}}</span>    
+            </li>
+        </ul>
+        
+        
+    </div>  
+    
+    
+
+    <div *ngIf="showMessageBet" class="msgFinalBet">
+        
+        <h5>Result</h5>
+        <div *ngIf="winnerBet.number != 0" class="winnerMsg text-center">
+
+            <div class="ballNumbers">
+                <li [ngStyle]="{'background-color': winnerBet['color']}">
+                    <span> {{winnerBet.number}} </span>    
+                </li>
+            </div>
+
+            <h6>You Won</h6>
+
+        </div>
+        
+        <div *ngIf="LooseBet.number != 0" class="LooseMsg text-center">
+
+            <div class="ballNumbers">
+                <li [ngStyle]="{'background-color': LooseBet['color']}">
+                    <span> {{LooseBet.number}} </span>    
+                </li>
+            </div>
+
+            <h6>You Lose</h6>
+
+        </div>
+
+
+    </div>
+
 
     <div class="clearSelection">
         <a (click)="clearSelection()"> Clear selection </a>
     </div>
+    
 
 </div>

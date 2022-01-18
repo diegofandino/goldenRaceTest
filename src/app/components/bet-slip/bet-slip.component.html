@@ -4,9 +4,9 @@
         <div class="emptyBallsContainer" >
             <li *ngFor="let item of arrayNumberChosen; let i = index"  
             [ngStyle]="{'background-color': item['color']}"
-            [ngStyle]="{'background-color': item.numero == 0 ? '#f5f5f5' : item['color']}"
+            [ngStyle]="{'background-color': item.number == 0 ? '#f5f5f5' : item['color']}"
             >
-                <span>{{item.numero | number}}</span>    
+                <span>{{item.number | number}}</span>    
             </li>
         </div>
     </ul>

@@ -1,4 +1,4 @@
 export interface ballIndividual {
-    numero: number;
+    number: number;
     color: string;
   }

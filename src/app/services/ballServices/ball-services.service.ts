@@ -8,6 +8,7 @@ import { ballIndividual } from '../../interfaces/ball';
 export class BallServicesService {
 
   public chosenNumbers :Subject<ballIndividual[]> = new Subject();
+  public betNumbers :Subject<ballIndividual[]> = new Subject();
   public numberBalls: number = 0;
   constructor() { }
 

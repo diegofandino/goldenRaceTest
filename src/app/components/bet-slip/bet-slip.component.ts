@@ -22,12 +22,12 @@ export class BetSlipComponent implements OnInit {
     let index = 0;
 
     //Number of balls
-    this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => ({numero: 0, color: '#f5f5f5'}));
+    this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => ({number: 0, color: '#f5f5f5'}));
 
     //Balls
     this.ballService.chosenNumbers.subscribe((value: any) => {
       if(value.length <= 0){
-        this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => ({numero: 0, color: '#f5f5f5'}));
+        this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => ({number: 0, color: '#f5f5f5'}));
         index = 0;
         return;
       }
@@ -51,7 +51,7 @@ export class BetSlipComponent implements OnInit {
     
     for( var i = 0; i < this.arrayNumberChosen.length; i++){ 
       
-      if ( this.arrayNumberChosen[i].numero === 0) { 
+      if ( this.arrayNumberChosen[i].number === 0) { 
         
         this.arrayNumberChosen.splice(i, 1);
         i--;
@@ -59,7 +59,7 @@ export class BetSlipComponent implements OnInit {
       
     }
     
-    console.log(this.arrayNumberChosen);
+    this.ballService.betNumbers.next(this.arrayNumberChosen);
   }
 
 }
