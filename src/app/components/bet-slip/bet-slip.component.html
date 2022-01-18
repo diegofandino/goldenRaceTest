@@ -16,8 +16,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" style="border-radius: 0px;" id="basic-addon1">5x</span>
             </div>
-            <input type="number" min="0" oninput="this.value = Math.abs(this.value)" [(ngModel)]="priceControl" class="form-control" placeholder="Add bet amount" aria-label="betAmount" aria-describedby="basic-addon1">
-            <button type="button" class="btn btn-primary customBtn" (click)="validateMinAmount()">Ok</button>
+            <input id="inputPriceControl" type="number" min="0" oninput="this.value = Math.abs(this.value)" [(ngModel)]="priceControl" class="form-control" placeholder="Add bet amount" aria-label="betAmount" aria-describedby="basic-addon1">
+            <button id="btnValidateAmount" type="button" class="btn btn-primary customBtn" (click)="validateMinAmount()">Ok</button>
         </div>
     </div>
     

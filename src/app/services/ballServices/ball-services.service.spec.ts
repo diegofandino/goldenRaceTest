@@ -13,4 +13,9 @@ describe('BallServicesService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  
+  it('numberBalls always initialized in 0', () => {
+    expect(service.numberBalls).toBe(0);
+  });
+
 });
