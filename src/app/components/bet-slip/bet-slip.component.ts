@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ballIndividual } from 'src/app/interfaces/ball';
 import { BallServicesService } from '../../services/ballServices/ball-services.service';
 
 @Component({
@@ -9,8 +10,8 @@ import { BallServicesService } from '../../services/ballServices/ball-services.s
 })
 export class BetSlipComponent implements OnInit {
 
-  arrayNumberChosen: number[] = [];
-  arrayNumberBalls: number[] = [];
+  arrayNumberChosen: ballIndividual[] = [];
+  arrayNumberBalls: ballIndividual[] = [];
   priceControl: number = 0;
   totalAmount: number = 0;
   constructor(private ballService :BallServicesService ) { }
@@ -21,16 +22,17 @@ export class BetSlipComponent implements OnInit {
     let index = 0;
 
     //Number of balls
-    this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => 0);
+    this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => ({numero: 0, color: '#f5f5f5'}));
 
     //Balls
-    this.ballService.chosenNumbers.subscribe((value) => {
+    this.ballService.chosenNumbers.subscribe((value: any) => {
       if(value.length <= 0){
-        this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => 0);
+        this.arrayNumberChosen =  Array.from({length: this.ballService.numberBalls}, (_, i) => ({numero: 0, color: '#f5f5f5'}));
         index = 0;
         return;
       }
-      this.arrayNumberChosen[index] = value[value.length - 1];
+      let lastPosition = value.pop();
+      this.arrayNumberChosen[index] = lastPosition;
       index++;
    });
   }
@@ -49,7 +51,7 @@ export class BetSlipComponent implements OnInit {
     
     for( var i = 0; i < this.arrayNumberChosen.length; i++){ 
       
-      if ( this.arrayNumberChosen[i] === 0) { 
+      if ( this.arrayNumberChosen[i].numero === 0) { 
         
         this.arrayNumberChosen.splice(i, 1);
         i--;

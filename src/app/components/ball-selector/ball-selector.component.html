@@ -3,8 +3,8 @@
     <h5>Numbers</h5>
 
     <ul class="ballNumbers">
-        <li *ngFor="let number of arrayNumbers; let i = index" (click)="chooseBall(number)">
-            <span>{{number}}</span>    
+        <li *ngFor="let number of arrayNumbers; let i = index" (click)="chooseBall(number)" [ngStyle]="{'background-color': number['color']}">
+            <span>{{number.numero | number}}</span>    
         </li>
     </ul>
 
